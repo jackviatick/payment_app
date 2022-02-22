@@ -217,6 +217,15 @@ dependencies {
     } else {
         implementation jscFlavor
     }
+
+    // bms dependencies
+    implementation project(':bms-android-sdk-release')
+    implementation "com.android.support:design:27.1.1"
+    implementation "com.squareup.picasso:picasso:2.7+"
+    implementation 'com.google.android.gms:play-services-location:19.0.0'
+    implementation 'com.mappedin.sdk:mappedin:4.0.0'
+    implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.0.0'
+
 }
 
 // Run this once to be able to run the application with BUCK
