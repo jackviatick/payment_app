@@ -1,7 +1,17 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, Text, ScrollView} from 'react-native';
 import {styles} from './styles';
+import {stopModule} from '../../services/NativeModule';
 const Notification = () => {
+  const stopSdk = async () => {
+    await stopModule();
+  };
+
+  useEffect(() => {
+    console.log('stop sdk');
+    stopSdk();
+  }, []);
+
   const renderSmallCard = (name: string, date: string) => {
     return (
       <View style={[styles.smallCard, styles.shadow]}>
