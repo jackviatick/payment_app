@@ -4,7 +4,11 @@ import {colors} from 'constant/colors';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {NavigatorParamList} from 'navigators/AppStack';
 import {styles} from './styles';
-import {isInited} from '../../services/NativeModule';
+import {
+  isBmsServiceStarted,
+  isInited,
+  startBmsService,
+} from '../../services/NativeModule';
 type PaymentScreenProps = NativeStackScreenProps<NavigatorParamList, 'Payment'>;
 
 const Payment = ({navigation}: PaymentScreenProps) => {
@@ -31,6 +35,9 @@ const Payment = ({navigation}: PaymentScreenProps) => {
   const checkInit = async () => {
     const success = await isInited();
     console.log('is inited ---', success);
+    console.log('RN start service');
+    await startBmsService();
+    await isBmsServiceStarted();
   };
   useEffect(() => {
     checkInit();

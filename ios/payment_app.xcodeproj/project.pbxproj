@@ -11,6 +11,12 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		1C01D11927CDE73E00E2AAC6 /* BmsSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C01D11727CDE73000E2AAC6 /* BmsSDK.framework */; platformFilter = ios; };
+		1C01D11A27CDE73E00E2AAC6 /* BmsSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1C01D11727CDE73000E2AAC6 /* BmsSDK.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1C01D11C27CDE76800E2AAC6 /* Mappedin.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1C01D11B27CDE76800E2AAC6 /* Mappedin.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1C7DFD3D27C7BFC800745544 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 1C7DFD3C27C7BFC800745544 /* Fonts */; };
+		1C7DFD6927C8893C00745544 /* BmsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7DFD6827C8893C00745544 /* BmsController.swift */; };
+		1C7DFD9A27CDD31300745544 /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7DFD9927CDD31300745544 /* test.swift */; };
 		6172F2D35A4C3AA820D92908 /* libPods-payment_app.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6423831EA8574132BED9D8CC /* libPods-payment_app.a */; };
 		7EF68E3733C33B6898317E18 /* libPods-payment_app-payment_appTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABFE59519B596E51CEFDCCC0 /* libPods-payment_app-payment_appTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
@@ -26,6 +32,21 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		1C1AB7D227CDE01F004F4DCC /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1C01D11C27CDE76800E2AAC6 /* Mappedin.framework in Embed Frameworks */,
+				1C01D11A27CDE73E00E2AAC6 /* BmsSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		00E356EE1AD99517003FC87E /* payment_appTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = payment_appTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -36,6 +57,13 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = payment_app/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = payment_app/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = payment_app/main.m; sourceTree = "<group>"; };
+		1C01D11727CDE73000E2AAC6 /* BmsSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BmsSDK.framework; sourceTree = "<group>"; };
+		1C01D11B27CDE76800E2AAC6 /* Mappedin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mappedin.framework; path = BmsSDK.framework/Frameworks/Mappedin.framework; sourceTree = "<group>"; };
+		1C7DFD3C27C7BFC800745544 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Fonts; path = "../node_modules/react-native-vector-icons/Fonts"; sourceTree = "<group>"; };
+		1C7DFD6527C7C46A00745544 /* payment_app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = payment_app.entitlements; path = payment_app/payment_app.entitlements; sourceTree = "<group>"; };
+		1C7DFD6727C8893C00745544 /* payment_app-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "payment_app-Bridging-Header.h"; sourceTree = "<group>"; };
+		1C7DFD6827C8893C00745544 /* BmsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BmsController.swift; sourceTree = "<group>"; };
+		1C7DFD9927CDD31300745544 /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
 		1D0AE47A65C8663E3B452821 /* Pods-payment_app-payment_appTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-payment_app-payment_appTests.release.xcconfig"; path = "Target Support Files/Pods-payment_app-payment_appTests/Pods-payment_app-payment_appTests.release.xcconfig"; sourceTree = "<group>"; };
 		6423831EA8574132BED9D8CC /* libPods-payment_app.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-payment_app.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C97AB639B58BBB4B15BBE30 /* Pods-payment_app-payment_appTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-payment_app-payment_appTests.debug.xcconfig"; path = "Target Support Files/Pods-payment_app-payment_appTests/Pods-payment_app-payment_appTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -59,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C01D11927CDE73E00E2AAC6 /* BmsSDK.framework in Frameworks */,
 				6172F2D35A4C3AA820D92908 /* libPods-payment_app.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -86,19 +115,32 @@
 		13B07FAE1A68108700A75B9A /* payment_app */ = {
 			isa = PBXGroup;
 			children = (
+				1C7DFD6627C8890400745544 /* Controller */,
+				1C7DFD6527C7C46A00745544 /* payment_app.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				1C7DFD9927CDD31300745544 /* test.swift */,
 			);
 			name = payment_app;
+			sourceTree = "<group>";
+		};
+		1C7DFD6627C8890400745544 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1C7DFD6827C8893C00745544 /* BmsController.swift */,
+				1C7DFD6727C8893C00745544 /* payment_app-Bridging-Header.h */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1C01D11B27CDE76800E2AAC6 /* Mappedin.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				6423831EA8574132BED9D8CC /* libPods-payment_app.a */,
 				ABFE59519B596E51CEFDCCC0 /* libPods-payment_app-payment_appTests.a */,
@@ -116,6 +158,8 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				1C01D11727CDE73000E2AAC6 /* BmsSDK.framework */,
+				1C7DFD3C27C7BFC800745544 /* Fonts */,
 				13B07FAE1A68108700A75B9A /* payment_app */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* payment_appTests */,
@@ -145,7 +189,6 @@
 				6C97AB639B58BBB4B15BBE30 /* Pods-payment_app-payment_appTests.debug.xcconfig */,
 				1D0AE47A65C8663E3B452821 /* Pods-payment_app-payment_appTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -185,6 +228,7 @@
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				C8AC78B0264D0F9F6F6D630E /* [CP] Embed Pods Frameworks */,
 				ADC9DDC32298B72B3CF5DC8E /* [CP] Copy Pods Resources */,
+				1C1AB7D227CDE01F004F4DCC /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -208,7 +252,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1320;
 					};
 				};
 			};
@@ -243,6 +287,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C7DFD3D27C7BFC800745544 /* Fonts in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
@@ -411,6 +456,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C7DFD6927C8893C00745544 /* BmsController.swift in Sources */,
+				1C7DFD9A27CDD31300745544 /* test.swift in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
@@ -431,6 +478,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6C97AB639B58BBB4B15BBE30 /* Pods-payment_app-payment_appTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -458,6 +506,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1D0AE47A65C8663E3B452821 /* Pods-payment_app-payment_appTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = payment_appTests/Info.plist;
@@ -484,8 +533,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = payment_app/payment_app.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 65BFNMKECG;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/payment_app",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/BmsSDK.framework/Frameworks",
+				);
 				INFOPLIST_FILE = payment_app/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -498,6 +555,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = payment_app;
+				SWIFT_OBJC_BRIDGING_HEADER = "payment_app-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -510,7 +568,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = payment_app/payment_app.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 65BFNMKECG;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/payment_app",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/BmsSDK.framework/Frameworks",
+				);
 				INFOPLIST_FILE = payment_app/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -523,6 +589,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = payment_app;
+				SWIFT_OBJC_BRIDGING_HEADER = "payment_app-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

@@ -4,17 +4,21 @@ const {BmsModule} = NativeModules;
 
 console.log('bms module ---------', BmsModule);
 
-const {initCtrl, initSdk, isSdkInited, stopSdk, startBmsService} = BmsModule;
-
-export const initModule = async () => {
-  await initCtrl();
-};
+const {
+  initCtrl,
+  initSdk,
+  isSdkInited,
+  stopSdk,
+  startService,
+  isServiceStarted,
+} = BmsModule;
 
 export const stopModule = async () => {
   await stopSdk();
 };
 
-export const initBluetoothService = async () => {
+export const initBmsSdk = async () => {
+  await initCtrl();
   const success = await initSdk();
   return success;
 };
@@ -23,6 +27,10 @@ export const isInited = async () => {
   return await isSdkInited();
 };
 
-export const startService = async () => {
-  return await startBmsService();
+export const startBmsService = async () => {
+  return await startService();
+};
+
+export const isBmsServiceStarted = async () => {
+  return await isServiceStarted();
 };

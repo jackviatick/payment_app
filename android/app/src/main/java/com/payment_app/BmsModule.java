@@ -61,20 +61,20 @@ public class BmsModule extends ReactContextBaseJavaModule {
     @Override
     public void customerInited(boolean success) {
       Log.i(TAG, "2 customer init " + success);
+      ViaBmsCtrl.startBmsService();
+      Log.i(TAG, "Start Bms service ");
 
-      if (success) {
-        startBmsService();
-      }
     }
 
     @Override
     public void checkin() {
+      Log.d(TAG, "Checkin Callback");
 
     }
 
     @Override
     public void checkout() {
-
+      Log.d(TAG, "Checkout Callback");
     }
 
     @Override
@@ -82,18 +82,26 @@ public class BmsModule extends ReactContextBaseJavaModule {
       Log.i(TAG, "onDistanceBeacons called " + list.size());
     }
 
+    // callback when device site is loaded succcessfully or failed, will
+    // return error message code when it fails
+    // Possible error code:
+    // - INVALID_BMS_ENVIRONMENT: The BMS environment indicates in the device site
+    // url doesn't match with the environment on the SDK settings
+    // - INVALID_SERIAL_CODE: URL doesn't include serial code or serial code is of
+    // invalid format
+    // - SDK_NOT_INITIATED: openDeviceSite is called before the SDK is initiated
+    // - NO_MINISITE_SCHEDULE: no minisite is attached with the device at the moment,
+    // could be due to the serial code not existed or the device schedule isn't attached
     @Override
-    public void deviceSiteLoaded(boolean b, String s) {
-
+    public void deviceSiteLoaded(boolean loaded, String error) {
+      Log.d(TAG, "deviceSiteLoaded Callback "+ loaded + " error "  + error);
     }
 
+
+    // callback when there's new proximity alert (contact) been established
     @Override
     public void onNewProximityAlert(String s, int i, int i1, String s1) {
       Log.d(TAG, "onNewProximityAlert called " + s + " " + i + " " + i1 + " " + s1);
-//      if (contactCallback != null && i > 0 && i1 > 0) {
-//        Log.d(TAG, "onNewProximityAlert 2 called " + s + " " + i + " " + i1 + " " + s1);
-//        contactCallback.onNewContact();
-//      }
     }
 
     @Override
@@ -133,8 +141,6 @@ public class BmsModule extends ReactContextBaseJavaModule {
     Log.i(TAG, "Is inited sdk " + ViaBmsCtrl.isSdkInited());
 
      promise.resolve(ViaBmsCtrl.isSdkInited());
-
-//    return ViaBmsCtrl.isSdkInited();
   }
 
   @ReactMethod
@@ -161,8 +167,6 @@ public class BmsModule extends ReactContextBaseJavaModule {
       notificationManager.createNotificationChannel(channel);
     }
 
-    initSdk();
-
 //    this.mainController = new MainController(reactContext.getApplicationContext(),
 //      getCurrentActivity(), this);
 //    this.ocrController = new OcrController(getCurrentActivity());
@@ -175,6 +179,13 @@ public class BmsModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void initSdk() {
     List<IBeacon> requestDistanceBeacons = new ArrayList<>();
+    // add beacon you want to track distance, only use this if you
+    // specifically needs to use the onDistanceBeacons callback
+    IBeacon simBeacon = new IBeacon("A4130021-2F39-4717-B86F-0F65EDAE18B1",16808,19400);
+    IBeacon simBeacon2 = new IBeacon("1be9f53c-b784-40bb-9e97-65c61fe95eb8",1,2);
+
+    requestDistanceBeacons.add(simBeacon);
+    requestDistanceBeacons.add(simBeacon2);
     if(!ViaBmsCtrl.isSdkInited()) {
       ViaBmsCtrl.settings(
               true, // enableAlert: whether to show notification when a minisite is triggered
@@ -214,20 +225,18 @@ public class BmsModule extends ReactContextBaseJavaModule {
       ViaBmsCtrl.initSdk(this.getCurrentActivity(), BmsModule.BMS_KEY, BmsModule.CHANNEL_ID);
     }
 
-    // add beacon you want to track distance, only use this if you
-    // specifically needs to use the onDistanceBeacons callback
-//    requestDistanceBeacons.add(new IBeacon("uuid", major, minor));
-
   }
 
   @ReactMethod
-  public void startBmsService() {
+  public void startService() {
     boolean sdkInited = ViaBmsCtrl.isSdkInited();
     Log.d(TAG, "startBmsService sdkInited " + sdkInited);
     if(!ViaBmsCtrl.isSdkInited()) {
       initSdk();
     }
     else {
+      Log.d(TAG, "startBmsService start Bms service ");
+
       if(!ViaBmsCtrl.isBmsRunning()) {
         ViaBmsCtrl.startBmsService();
       }
@@ -236,7 +245,7 @@ public class BmsModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void isServiceStarted(Promise promise) {
-
+    Log.d(TAG, "is startBmsService started " + ViaBmsCtrl.isBmsRunning());
     promise.resolve(ViaBmsCtrl.isBmsRunning());
   }
 }
