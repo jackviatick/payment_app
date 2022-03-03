@@ -79,14 +79,6 @@ class ViewController: UIViewController {
     }
 
     // open a minisite url (from NFC Tag or others) as a minisite on the same app
-    @objc public func openDeviceSite(sender: UIButton) {
-        // this method is to stop the bms service
-        let url = "https://DEVICE_SITE_URL";
-
-        viaBmsCtrl.openDeviceSite(url);
-    }
-
-    // open a minisite url (from NFC Tag or others) as a minisite on the same app
     @objc public func destroySDK(sender: UIButton) {
         // destroy the SDK instance so it can be initiated again
 
@@ -98,6 +90,10 @@ class ViewController: UIViewController {
 
 // implement delegate of bms here
 extension ViewController: ViaBmsCtrlDelegate {
+  func onProximityAlert() {
+    // do nothing
+  }
+  
 
     // this will be called when sdk is inited
     // list of zones in the sdk application is passed here
@@ -106,8 +102,6 @@ extension ViewController: ViaBmsCtrlDelegate {
 
         // this method must be called in order to enable attendance and tracking feature
         // authorizedZones is optional field
-    // sdkInited callback will be called after initialization
-        viaBmsCtrl.initCustomer(identifier: "PASTE IDENTIFIER OF CUSTOMER HERE", email: "example@email.com", phone: "+000000000", remark: "Device info!", authorizedZones: zones);
     }
 
     func customerInited(inited: Bool) {
