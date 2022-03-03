@@ -40,7 +40,7 @@ const Payment = ({navigation}: PaymentScreenProps) => {
     await isBmsServiceStarted();
   };
   useEffect(() => {
-    checkInit();
+    // checkInit();
   }, []);
 
   return (
