@@ -3,10 +3,14 @@ package com.payment_app;
 import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Build;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -223,7 +227,7 @@ public class BmsModule extends ReactContextBaseJavaModule {
       // sdkInited callback will be called after initialization
       // only call this after calling settings
       Log.i(TAG, "Start init SDK 1");
-      ViaBmsCtrl.initSdk(this.getCurrentActivity(), BmsModule.BMS_KEY, BmsModule.CHANNEL_ID);
+      ViaBmsCtrl.initSdk(this.getCurrentActivity(), BmsModule.BMS_KEY, null);
     }
 
   }
@@ -249,4 +253,25 @@ public class BmsModule extends ReactContextBaseJavaModule {
     Log.d(TAG, "is startBmsService started " + ViaBmsCtrl.isBmsRunning());
     promise.resolve(ViaBmsCtrl.isBmsRunning());
   }
+
+//  @ReactMethod
+//  public void testNotification() {
+//    int notificationId = 1;
+//    Intent intent = new Intent(this.getReactApplicationContext(), MainActivity.class);
+//    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//    PendingIntent pendingIntent = PendingIntent.getActivity(this.getReactApplicationContext(), 0, intent, 0);
+//
+//    NotificationCompat.Builder builder = new NotificationCompat.Builder(this.getCurrentActivity(), BmsModule.CHANNEL_ID)
+//      .setSmallIcon(R.mipmap.ic_launcher)
+//      .setContentTitle("Reminder")
+//      .setContentText("Please submit your temperature in time")
+//      .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+//      .setContentIntent(pendingIntent)
+//      .setAutoCancel(true);
+//
+//    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this.getCurrentActivity());
+//
+//    // notificationId is a unique int for each notification that you must define
+//    notificationManager.notify(notificationId, builder.build());
+//  }
 }

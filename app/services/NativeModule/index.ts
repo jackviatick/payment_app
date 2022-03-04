@@ -11,6 +11,7 @@ const {
   stopSdk,
   startService,
   isServiceStarted,
+  testNotification,
 } = BmsModule;
 
 export const stopModule = async () => {
@@ -33,4 +34,8 @@ export const startBmsService = async () => {
 
 export const isBmsServiceStarted = async () => {
   return await isServiceStarted();
+};
+
+export const testNoti = async () => {
+  return await testNotification();
 };

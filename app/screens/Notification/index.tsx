@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {View, Text, ScrollView} from 'react-native';
 import {styles} from './styles';
-import {stopModule} from '../../services/NativeModule';
+import {stopModule, testNoti} from '../../services/NativeModule';
 const Notification = () => {
   const stopSdk = async () => {
     await stopModule();
@@ -9,7 +9,8 @@ const Notification = () => {
 
   useEffect(() => {
     console.log('stop sdk');
-    stopSdk();
+    // stopSdk();
+    testNoti();
   }, []);
 
   const renderSmallCard = (name: string, date: string) => {
