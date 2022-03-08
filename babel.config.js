@@ -10,6 +10,7 @@ module.exports = {
           navigators: './app/navigators',
           screens: './app/screens',
           constant: './app/constant',
+          services: './app/services',
         },
       },
     ],

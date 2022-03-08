@@ -1,16 +1,19 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
-  Text,
   Dimensions,
   useWindowDimensions,
   ScrollView,
+  Keyboard,
 } from 'react-native';
 import {styles} from 'screens/Home/styles';
 import Carousel from 'react-native-snap-carousel';
 import {colors} from 'constant/colors';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {Text, Button, FormControl, Input, Modal} from 'native-base';
+import {initBmsCustomer} from 'services/NativeModule';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Home = () => {
   const entries = [
@@ -49,6 +52,19 @@ const Home = () => {
     );
   };
 
+  const getUserData = async () => {
+    return await AsyncStorage.getItem('USER_DATA');
+  };
+
+  useEffect(() => {
+    getUserData().then(data => {
+      console.log('user dta ', data);
+      if (!data) {
+        setShowModal(true);
+      }
+    });
+  }, []);
+
   const layout = useWindowDimensions();
 
   const [index, setIndex] = React.useState(0);
@@ -56,6 +72,14 @@ const Home = () => {
     {key: 'first', title: 'Sent'},
     {key: 'second', title: 'Received'},
   ]);
+  const [showModal, setShowModal] = useState(false);
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+
+  const [invalidUsername, setInvalidUsername] = useState(false);
+  const [invalidEmail, setInvalidEmail] = useState(false);
+  const [invalidPhone, setInvalidPhone] = useState(false);
 
   const renderSmallCard = (name: string, date: string, value: string) => {
     return (
@@ -102,14 +126,77 @@ const Home = () => {
     </ScrollView>
   );
 
-  // const SecondRoute = () => (
-  //   <View style={{flex: 1, backgroundColor: colors.grey}} />
-  // );
-
   const renderScene = SceneMap({
     first: FirstRoute,
     second: FirstRoute,
   });
+
+  const checkEmail = (emailString: string) => {
+    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+    return reg.test(emailString);
+  };
+
+  const onSubmit = () => {
+    if (
+      !!username &&
+      !!phone &&
+      email &&
+      !invalidUsername &&
+      !invalidEmail &&
+      !invalidPhone
+    ) {
+      setShowModal(false);
+
+      const date = new Date();
+      let currentMillis = date.getMilliseconds();
+      const id = currentMillis.toString();
+      initBmsCustomer(id, phone, email)
+        .then(res => {
+          console.log('init customer success', res);
+          const user = phone + ',' + email;
+          AsyncStorage.setItem('USER_DATA', user)
+            .then(r => {
+              console.log('set item successfully', r);
+            })
+            .catch(err => {
+              console.log('get item err', err);
+            });
+        })
+        .catch(err => {
+          console.log('init customer error', err);
+        });
+    } else {
+      setInvalidPhone(true);
+      setInvalidUsername(true);
+      setInvalidEmail(true);
+    }
+
+    Keyboard.dismiss();
+  };
+
+  const onBlurName = () => {
+    if (!username) {
+      setInvalidUsername(true);
+    } else {
+      setInvalidUsername(false);
+    }
+  };
+
+  const onBlurEmail = () => {
+    if (!email || !checkEmail(email)) {
+      setInvalidEmail(true);
+    } else {
+      setInvalidEmail(false);
+    }
+  };
+
+  const onBlurPhone = () => {
+    if (!phone) {
+      setInvalidPhone(true);
+    } else {
+      setInvalidPhone(false);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -160,6 +247,61 @@ const Home = () => {
           initialLayout={{width: layout.width}}
         />
       </View>
+
+      <Modal isOpen={showModal} size="lg">
+        <Modal.Content backgroundColor="white" maxWidth="400px" paddingX="2">
+          <Modal.Body>
+            <Text
+              mt="3"
+              alignSelf="center"
+              fontSize="18"
+              fontWeight="500"
+              color={colors.primary}>
+              Information
+            </Text>
+            <Text marginBottom="3">Provide your information to continue!</Text>
+            <FormControl>
+              <Input
+                onBlur={onBlurName}
+                value={username}
+                onChangeText={value => setUsername(value)}
+                isInvalid={invalidUsername}
+                size="md"
+                placeholder="Full name"
+              />
+            </FormControl>
+            <FormControl mt="4">
+              <Input
+                onBlur={onBlurEmail}
+                value={email}
+                onChangeText={value => setEmail(value)}
+                isInvalid={invalidEmail}
+                keyboardType="email-address"
+                size="md"
+                placeholder="Email address"
+              />
+            </FormControl>
+            <FormControl mt="4">
+              <Input
+                onBlur={onBlurPhone}
+                value={phone}
+                onChangeText={value => setPhone(value)}
+                isInvalid={invalidPhone}
+                keyboardType="numeric"
+                size="md"
+                placeholder="Phone number"
+              />
+            </FormControl>
+          </Modal.Body>
+          <Modal.Footer backgroundColor="white">
+            <Button.Group space={2}>
+              <Button backgroundColor={colors.primary} onPress={onSubmit}>
+                Save
+              </Button>
+            </Button.Group>
+          </Modal.Footer>
+        </Modal.Content>
+      </Modal>
     </View>
   );
 };

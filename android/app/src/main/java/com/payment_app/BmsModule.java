@@ -46,20 +46,15 @@ public class BmsModule extends ReactContextBaseJavaModule {
         return "BmsModule";
     }
 
-  private static String userIdentifier ="123123";
-  private static String userEmail = "jack@viatick.com";
+  private static List<ViaZone> bmsZones = new ArrayList<>();
   private final static ViaBmsCtrl.ViaBmsCtrlDelegate bmsDelegate = new ViaBmsCtrl.ViaBmsCtrlDelegate() {
     @Override
     public void sdkInited(boolean success, List<ViaZone> zones) {
       Log.d(TAG, "1 sdk init " + success);
-      Log.d(TAG, "Zone " + success);
+      Log.d(TAG, "Zone " + zones);
       if (success) {
-        Log.d(TAG, "Customer identifier >>>" + userIdentifier + " Customer userEmail >>>" + userEmail);
-        ViaBmsCtrl.initCustomer(userIdentifier, "", userEmail, zones);
+        bmsZones = zones;
       }
-//      else {
-//        startCallback.onDone(false);
-//      }
     }
 
     @Override
@@ -230,6 +225,11 @@ public class BmsModule extends ReactContextBaseJavaModule {
       ViaBmsCtrl.initSdk(this.getCurrentActivity(), BmsModule.BMS_KEY, null);
     }
 
+  }
+
+  @ReactMethod
+  public void initCustomer(String identifier, String phone, String email) {
+    ViaBmsCtrl.initCustomer(identifier, phone, email, bmsZones);
   }
 
   @ReactMethod
