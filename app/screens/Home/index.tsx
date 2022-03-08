@@ -41,7 +41,7 @@ const Home = () => {
         </View>
         <View style={[styles.row, styles.noPadding]}>
           <Text style={[styles.text, styles.normalFontWeight]}>
-            Lindsey Johnson
+            Firzanah Nazmi
           </Text>
           <Text style={[styles.text, styles.normalFontWeight]}>11/22</Text>
         </View>
@@ -57,7 +57,7 @@ const Home = () => {
     {key: 'second', title: 'Received'},
   ]);
 
-  const renderSmallCard = (name: string, date: string) => {
+  const renderSmallCard = (name: string, date: string, value: string) => {
     return (
       <View style={[styles.smallCard, styles.shadow]}>
         <View style={styles.centerSmallCard}>
@@ -73,8 +73,8 @@ const Home = () => {
             <Text style={styles.date}>{date}</Text>
           </View>
         </View>
-        <View>
-          <Text style={styles.price}>RM 72.00</Text>
+        <View style={{position: 'absolute', alignSelf: 'center', right: 10}}>
+          <Text style={styles.price}>{value}</Text>
         </View>
       </View>
     );
@@ -87,14 +87,18 @@ const Home = () => {
         <Ionicons color={'#ccc'} name="search-outline" size={15} />
       </View>
       <Text style={styles.fontWeightBold}>Today</Text>
-      {renderSmallCard('UCommune Transaction', '18, February, 2022')}
+      {renderSmallCard(
+        'UCommune Transaction Point',
+        '7, March, 2022',
+        'SGD 2.00',
+      )}
 
       <Text style={styles.fontWeightBold}>Yesterday</Text>
-      {renderSmallCard('Keg Valley', '17, February, 2022')}
-      {renderSmallCard('Keg Valley', '17, February, 2022')}
-      {renderSmallCard('Keg Valley', '17, February, 2022')}
-      {renderSmallCard('Keg Valley', '17, February, 2022')}
-      {renderSmallCard('Keg Valley', '17, February, 2022')}
+      {renderSmallCard('Woodlands Central Base', '5, March, 2022', 'SGD 85.78')}
+      {renderSmallCard('Tuas Link Base Point', '4, March, 2022', 'SGD 29.99')}
+      {renderSmallCard('SDC Gate 1', '3, March, 2022', 'SGD 9.99')}
+      {renderSmallCard('SportHub Booth 2', '26, Feb, 2022', 'SGD 8.99')}
+      {renderSmallCard('SportHub Booth 1', '26, Feb, 2022', 'SGD 5.99')}
     </ScrollView>
   );
 
@@ -111,7 +115,7 @@ const Home = () => {
     <View style={styles.container}>
       <Text style={styles.balance}>Your balance</Text>
       <View style={styles.balanceNumber}>
-        <Text style={styles.title}>RM 926.21</Text>
+        <Text style={styles.title}>SGD486.44</Text>
         <View>
           <Ionicons name="people-circle" size={30} color={colors.primary} />
         </View>

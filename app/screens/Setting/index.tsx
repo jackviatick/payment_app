@@ -5,7 +5,7 @@ import {colors} from 'constant/colors';
 
 const Setting = () => {
   const layout = useWindowDimensions();
-  const renderCard = (icon: string) => {
+  const renderCard = (title: string, icon: string) => {
     return (
       <View
         style={{
@@ -28,9 +28,7 @@ const Setting = () => {
           }}>
           <Ionicons name={icon} size={20} color={colors.white} />
         </View>
-        <Text style={{marginTop: 20, color: colors.black}}>
-          Profile information
-        </Text>
+        <Text style={{marginTop: 20, color: colors.black}}>{title}</Text>
       </View>
     );
   };
@@ -59,10 +57,10 @@ const Setting = () => {
             alignItems: 'center',
             justifyContent: 'center',
           }}>
-          {renderCard('information-sharp')}
-          {renderCard('mail-open-sharp')}
-          {renderCard('call-sharp')}
-          {renderCard('lock-closed-sharp')}
+          {renderCard('My Information', 'information-sharp')}
+          {renderCard('My Notice', 'mail-open-sharp')}
+          {renderCard('My Contact Details', 'call-sharp')}
+          {renderCard('My Credentials', 'lock-closed-sharp')}
         </View>
       </View>
     </View>
@@ -96,6 +94,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: colors.black,
     marginBottom: 10,
+    textAlign: 'center',
   },
   shadow: {
     shadowColor: '#ccc',

@@ -41,9 +41,7 @@ const Card = () => {
           <Text style={styles.text}>EXPIRES</Text>
         </View>
         <View style={[styles.row, {paddingTop: 0}]}>
-          <Text style={[styles.text, {fontWeight: '500'}]}>
-            Lindsey Johnson
-          </Text>
+          <Text style={[styles.text, {fontWeight: '500'}]}>Firzanah Nazmi</Text>
           <Text style={[styles.text, {fontWeight: '500'}]}>11/22</Text>
         </View>
       </View>

@@ -13,7 +13,7 @@ const Notification = () => {
     testNoti();
   }, []);
 
-  const renderSmallCard = (name: string, date: string) => {
+  const renderSmallCard = (name: string, date: string, value: string) => {
     return (
       <View style={[styles.smallCard, styles.shadow]}>
         <View style={styles.centerSmallCard}>
@@ -29,8 +29,8 @@ const Notification = () => {
             <Text style={styles.date}>{date}</Text>
           </View>
         </View>
-        <View>
-          <Text style={styles.price}>RM 72.00</Text>
+        <View style={{position: 'absolute', alignSelf: 'center', right: 10}}>
+          <Text style={styles.price}>{value}</Text>
         </View>
       </View>
     );
@@ -38,19 +38,29 @@ const Notification = () => {
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.hideText} />
-      <View style={styles.titleView}>
-        <Text style={styles.title}>Notification</Text>
-      </View>
-      <Text style={styles.fontWeightBold}>Today</Text>
-      {renderSmallCard('UCommune Transaction', '18, February, 2022')}
+      <View style={{flex: 1, paddingBottom: 50}}>
+        <Text style={styles.hideText} />
+        <View style={styles.titleView}>
+          <Text style={styles.title}>Notification</Text>
+        </View>
+        <Text style={styles.fontWeightBold}>Today</Text>
+        {renderSmallCard(
+          'UCommune Transaction Point',
+          '7, March, 2022',
+          'SGD 2.00',
+        )}
 
-      <Text style={styles.fontWeightBold}>Yesterday</Text>
-      {renderSmallCard('Keg Valley', '17, February, 2022')}
-      {renderSmallCard('Keg Valley', '17, February, 2022')}
-      {renderSmallCard('Keg Valley', '17, February, 2022')}
-      {renderSmallCard('Keg Valley', '17, February, 2022')}
-      {renderSmallCard('Keg Valley', '17, February, 2022')}
+        <Text style={styles.fontWeightBold}>Yesterday</Text>
+        {renderSmallCard(
+          'Woodlands Central Base',
+          '5, March, 2022',
+          'SGD 85.78',
+        )}
+        {renderSmallCard('Tuas Link Base Point', '4, March, 2022', 'SGD 29.99')}
+        {renderSmallCard('SDC Gate 1', '3, March, 2022', 'SGD 9.99')}
+        {renderSmallCard('SportHub Booth 2', '26, Feb, 2022', 'SGD 8.99')}
+        {renderSmallCard('SportHub Booth 1', '26, Feb, 2022', 'SGD 5.99')}
+      </View>
     </ScrollView>
   );
 };

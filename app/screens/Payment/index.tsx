@@ -69,7 +69,7 @@ const Payment = ({navigation}: PaymentScreenProps) => {
         </Text>
       </View>
 
-      <Modal transparent visible={visible}>
+      <Modal transparent visible={false}>
         <View
           style={{
             justifyContent: 'center',
