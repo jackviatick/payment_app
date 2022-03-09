@@ -12,7 +12,7 @@ import {colors} from 'constant/colors';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Text, Button, FormControl, Input, Modal} from 'native-base';
-import {initBmsCustomer} from 'services/NativeModule';
+import {initBmsCustomer, startBmsService} from 'services/NativeModule';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Home = () => {
@@ -61,6 +61,8 @@ const Home = () => {
       console.log('user dta ', data);
       if (!data) {
         setShowModal(true);
+      } else {
+        startBmsService();
       }
     });
   }, []);
