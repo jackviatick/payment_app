@@ -27,6 +27,7 @@ export const styles = StyleSheet.create({
     fontWeight: '500',
     color: colors.black,
     marginBottom: 10,
+    lineHeight: 36,
   },
   shadow: {
     shadowColor: '#ccc',

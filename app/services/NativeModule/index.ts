@@ -2,6 +2,7 @@ import {NativeModules} from 'react-native';
 
 const {BmsModule} = NativeModules;
 
+console.log('NativeModules  ---------', NativeModules);
 console.log('bms module ---------', BmsModule);
 
 const {
@@ -20,7 +21,9 @@ export const stopModule = async () => {
 };
 
 export const initBmsSdk = async () => {
-  await initCtrl();
+  if (initCtrl) {
+    await initCtrl();
+  }
   const success = await initSdk();
   return success;
 };

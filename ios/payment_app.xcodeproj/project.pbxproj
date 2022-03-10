@@ -13,7 +13,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		1C01D11927CDE73E00E2AAC6 /* BmsSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C01D11727CDE73000E2AAC6 /* BmsSDK.framework */; platformFilter = ios; };
 		1C01D11A27CDE73E00E2AAC6 /* BmsSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1C01D11727CDE73000E2AAC6 /* BmsSDK.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		1C01D11C27CDE76800E2AAC6 /* Mappedin.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1C01D11B27CDE76800E2AAC6 /* Mappedin.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1C4DAF9827D9DFBA0022545F /* BmsModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C4DAF9727D9DFBA0022545F /* BmsModule.m */; };
 		1C7DFD3D27C7BFC800745544 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 1C7DFD3C27C7BFC800745544 /* Fonts */; };
 		1C7DFD6927C8893C00745544 /* BmsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7DFD6827C8893C00745544 /* BmsController.swift */; };
 		1C7DFD9A27CDD31300745544 /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7DFD9927CDD31300745544 /* test.swift */; };
@@ -39,7 +39,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				1C01D11C27CDE76800E2AAC6 /* Mappedin.framework in Embed Frameworks */,
 				1C01D11A27CDE73E00E2AAC6 /* BmsSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -58,12 +57,14 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = payment_app/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = payment_app/main.m; sourceTree = "<group>"; };
 		1C01D11727CDE73000E2AAC6 /* BmsSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BmsSDK.framework; sourceTree = "<group>"; };
-		1C01D11B27CDE76800E2AAC6 /* Mappedin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mappedin.framework; path = BmsSDK.framework/Frameworks/Mappedin.framework; sourceTree = "<group>"; };
+		1C4DAF9727D9DFBA0022545F /* BmsModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BmsModule.m; sourceTree = "<group>"; };
+		1C4DAF9927D9DFC50022545F /* BmsModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BmsModule.h; sourceTree = "<group>"; };
 		1C7DFD3C27C7BFC800745544 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Fonts; path = "../node_modules/react-native-vector-icons/Fonts"; sourceTree = "<group>"; };
 		1C7DFD6527C7C46A00745544 /* payment_app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = payment_app.entitlements; path = payment_app/payment_app.entitlements; sourceTree = "<group>"; };
 		1C7DFD6727C8893C00745544 /* payment_app-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "payment_app-Bridging-Header.h"; sourceTree = "<group>"; };
 		1C7DFD6827C8893C00745544 /* BmsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BmsController.swift; sourceTree = "<group>"; };
 		1C7DFD9927CDD31300745544 /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
+		1CE759E627D9B3E800E47663 /* Mappedin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mappedin.framework; path = BmsSDK.framework/Frameworks/Mappedin.framework; sourceTree = "<group>"; };
 		1D0AE47A65C8663E3B452821 /* Pods-payment_app-payment_appTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-payment_app-payment_appTests.release.xcconfig"; path = "Target Support Files/Pods-payment_app-payment_appTests/Pods-payment_app-payment_appTests.release.xcconfig"; sourceTree = "<group>"; };
 		6423831EA8574132BED9D8CC /* libPods-payment_app.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-payment_app.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C97AB639B58BBB4B15BBE30 /* Pods-payment_app-payment_appTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-payment_app-payment_appTests.debug.xcconfig"; path = "Target Support Files/Pods-payment_app-payment_appTests/Pods-payment_app-payment_appTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -115,6 +116,7 @@
 		13B07FAE1A68108700A75B9A /* payment_app */ = {
 			isa = PBXGroup;
 			children = (
+				1C4DAF9A27D9E86F0022545F /* Module */,
 				1C7DFD6627C8890400745544 /* Controller */,
 				1C7DFD6527C7C46A00745544 /* payment_app.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -126,6 +128,15 @@
 				1C7DFD9927CDD31300745544 /* test.swift */,
 			);
 			name = payment_app;
+			sourceTree = "<group>";
+		};
+		1C4DAF9A27D9E86F0022545F /* Module */ = {
+			isa = PBXGroup;
+			children = (
+				1C4DAF9927D9DFC50022545F /* BmsModule.h */,
+				1C4DAF9727D9DFBA0022545F /* BmsModule.m */,
+			);
+			name = Module;
 			sourceTree = "<group>";
 		};
 		1C7DFD6627C8890400745544 /* Controller */ = {
@@ -140,7 +151,8 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1C01D11B27CDE76800E2AAC6 /* Mappedin.framework */,
+				1CE759E627D9B3E800E47663 /* Mappedin.framework */,
+				1C01D11727CDE73000E2AAC6 /* BmsSDK.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				6423831EA8574132BED9D8CC /* libPods-payment_app.a */,
 				ABFE59519B596E51CEFDCCC0 /* libPods-payment_app-payment_appTests.a */,
@@ -158,7 +170,6 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				1C01D11727CDE73000E2AAC6 /* BmsSDK.framework */,
 				1C7DFD3C27C7BFC800745544 /* Fonts */,
 				13B07FAE1A68108700A75B9A /* payment_app */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -460,6 +471,7 @@
 				1C7DFD9A27CDD31300745544 /* test.swift in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				1C4DAF9827D9DFBA0022545F /* BmsModule.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -543,6 +555,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/BmsSDK.framework/Frameworks",
 				);
+				GENERATE_PKGINFO_FILE = YES;
 				INFOPLIST_FILE = payment_app/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -578,6 +591,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/BmsSDK.framework/Frameworks",
 				);
+				GENERATE_PKGINFO_FILE = YES;
 				INFOPLIST_FILE = payment_app/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -1,19 +1,29 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   View,
   Dimensions,
   useWindowDimensions,
   ScrollView,
   Keyboard,
+  TouchableOpacity,
 } from 'react-native';
 import {styles} from 'screens/Home/styles';
 import Carousel from 'react-native-snap-carousel';
 import {colors} from 'constant/colors';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {Text, Button, FormControl, Input, Modal} from 'native-base';
+import {
+  Text,
+  Button,
+  FormControl,
+  Input,
+  Modal,
+  KeyboardAvoidingView,
+} from 'native-base';
 import {initBmsCustomer, startBmsService} from 'services/NativeModule';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Loading from '../../components/Loading';
+import DropdownAlert from 'react-native-dropdownalert';
 
 const Home = () => {
   const entries = [
@@ -62,6 +72,7 @@ const Home = () => {
       if (!data) {
         setShowModal(true);
       } else {
+        console.log('start bms service');
         startBmsService();
       }
     });
@@ -82,6 +93,9 @@ const Home = () => {
   const [invalidUsername, setInvalidUsername] = useState(false);
   const [invalidEmail, setInvalidEmail] = useState(false);
   const [invalidPhone, setInvalidPhone] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  let dropdownRef = useRef<DropdownAlert>(null);
 
   const renderSmallCard = (name: string, date: string, value: string) => {
     return (
@@ -138,7 +152,7 @@ const Home = () => {
     return reg.test(emailString);
   };
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     if (
       !!username &&
       !!phone &&
@@ -148,29 +162,34 @@ const Home = () => {
       !invalidPhone
     ) {
       setShowModal(false);
-
       const date = new Date();
       let currentMillis = date.getMilliseconds();
       const id = currentMillis.toString();
       initBmsCustomer(id, phone, email)
         .then(res => {
           console.log('init customer success', res);
+          dropdownRef?.current?.alertWithType(
+            'success',
+            'Success',
+            'Customer has been successfully created!',
+          );
+
           const user = phone + ',' + email;
-          AsyncStorage.setItem('USER_DATA', user)
-            .then(r => {
-              console.log('set item successfully', r);
-            })
-            .catch(err => {
-              console.log('get item err', err);
-            });
+          AsyncStorage.setItem('USER_DATA', user);
         })
         .catch(err => {
-          console.log('init customer error', err);
+          dropdownRef?.current?.alertWithType(
+            'error',
+            'Error',
+            'Create customer has failed!',
+          );
         });
+      setLoading(false);
     } else {
       setInvalidPhone(true);
       setInvalidUsername(true);
       setInvalidEmail(true);
+      setLoading(false);
     }
 
     Keyboard.dismiss();
@@ -201,7 +220,7 @@ const Home = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Text style={styles.balance}>Your balance</Text>
       <View style={styles.balanceNumber}>
         <Text style={styles.title}>SGD486.44</Text>
@@ -222,7 +241,6 @@ const Home = () => {
         sliderWidth={width}
         itemWidth={width * 0.8}
       />
-
       <View style={[styles.tabview, {height: layout.height * 0.5}]}>
         <TabView
           renderTabBar={props => (
@@ -249,62 +267,77 @@ const Home = () => {
           initialLayout={{width: layout.width}}
         />
       </View>
-
       <Modal isOpen={showModal} size="lg">
-        <Modal.Content backgroundColor="white" maxWidth="400px" paddingX="2">
-          <Modal.Body>
-            <Text
-              mt="3"
-              alignSelf="center"
-              fontSize="18"
-              fontWeight="500"
-              color={colors.primary}>
-              Information
-            </Text>
-            <Text marginBottom="3">Provide your information to continue!</Text>
-            <FormControl>
-              <Input
-                onBlur={onBlurName}
-                value={username}
-                onChangeText={value => setUsername(value)}
-                isInvalid={invalidUsername}
-                size="md"
-                placeholder="Full name"
-              />
-            </FormControl>
-            <FormControl mt="4">
-              <Input
-                onBlur={onBlurEmail}
-                value={email}
-                onChangeText={value => setEmail(value)}
-                isInvalid={invalidEmail}
-                keyboardType="email-address"
-                size="md"
-                placeholder="Email address"
-              />
-            </FormControl>
-            <FormControl mt="4">
-              <Input
-                onBlur={onBlurPhone}
-                value={phone}
-                onChangeText={value => setPhone(value)}
-                isInvalid={invalidPhone}
-                keyboardType="numeric"
-                size="md"
-                placeholder="Phone number"
-              />
-            </FormControl>
-          </Modal.Body>
-          <Modal.Footer backgroundColor="white">
-            <Button.Group space={2}>
-              <Button backgroundColor={colors.primary} onPress={onSubmit}>
-                Save
-              </Button>
-            </Button.Group>
-          </Modal.Footer>
-        </Modal.Content>
+        <KeyboardAvoidingView behavior="padding">
+          <Modal.Content backgroundColor="white" maxWidth="400px" paddingX="2">
+            <Modal.Body>
+              <Text
+                mt="3"
+                alignSelf="center"
+                fontSize="18"
+                fontWeight="500"
+                color={colors.primary}>
+                Information
+              </Text>
+              <Text marginBottom="3">
+                Provide your information to continue!
+              </Text>
+              <FormControl>
+                <Input
+                  onBlur={onBlurName}
+                  value={username}
+                  onChangeText={value => setUsername(value)}
+                  isInvalid={invalidUsername}
+                  size="md"
+                  placeholder="Full name"
+                />
+              </FormControl>
+              <FormControl mt="4">
+                <Input
+                  onBlur={onBlurEmail}
+                  value={email}
+                  onChangeText={value => setEmail(value)}
+                  isInvalid={invalidEmail}
+                  keyboardType="email-address"
+                  size="md"
+                  placeholder="Email address"
+                />
+              </FormControl>
+              <FormControl mt="4">
+                <Input
+                  onBlur={onBlurPhone}
+                  value={phone}
+                  onChangeText={value => setPhone(value)}
+                  isInvalid={invalidPhone}
+                  keyboardType="number-pad"
+                  size="md"
+                  placeholder="Phone number"
+                />
+              </FormControl>
+            </Modal.Body>
+            <Modal.Footer backgroundColor="white">
+              <Button.Group space={2}>
+                <TouchableOpacity
+                  style={{
+                    backgroundColor: colors.primary,
+                    paddingVertical: 6,
+                    paddingHorizontal: 10,
+                    borderRadius: 5,
+                  }}
+                  onPress={() => {
+                    setLoading(true);
+                    onSubmit();
+                  }}>
+                  <Text color={colors.white}>Save</Text>
+                </TouchableOpacity>
+              </Button.Group>
+            </Modal.Footer>
+          </Modal.Content>
+        </KeyboardAvoidingView>
       </Modal>
-    </View>
+      <Loading isLoading={loading} />
+      <DropdownAlert ref={dropdownRef} />
+    </ScrollView>
   );
 };
 
