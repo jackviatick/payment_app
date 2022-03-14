@@ -1,9 +1,9 @@
-////
-////  BmsController.swift
-////  payment_app
-////
-////  Created by Hiếu on 2/25/22.
-////
+//
+//  BmsController.swift
+//  payment_app
+//
+//  Created by Hiếu on 2/25/22.
+//
 //
 import Foundation
 import BmsSDK

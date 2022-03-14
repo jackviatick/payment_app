@@ -20,7 +20,7 @@ import {
   Modal,
   KeyboardAvoidingView,
 } from 'native-base';
-import {initBmsCustomer, startBmsService} from 'services/NativeModule';
+import {initBmsCustomer} from 'services/NativeModule';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Loading from '../../components/Loading';
 import DropdownAlert from 'react-native-dropdownalert';
@@ -67,13 +67,17 @@ const Home = () => {
   };
 
   useEffect(() => {
+    console.log('RN init sdk');
     getUserData().then(data => {
       console.log('user dta ', data);
       if (!data) {
         setShowModal(true);
       } else {
-        console.log('start bms service');
-        startBmsService();
+        let userData = data.split(',');
+        let id = userData[0];
+        let phone = userData[1];
+        let email = userData[2];
+        initBmsCustomer(id, phone, email);
       }
     });
   }, []);
@@ -174,7 +178,7 @@ const Home = () => {
             'Customer has been successfully created!',
           );
 
-          const user = phone + ',' + email;
+          const user = id + ',' + phone + ',' + email;
           AsyncStorage.setItem('USER_DATA', user);
         })
         .catch(err => {

@@ -8,7 +8,6 @@ console.log('bms module ---------', BmsModule);
 const {
   initCtrl,
   initSdk,
-  initCustomer,
   isSdkInited,
   stopSdk,
   startService,
@@ -49,5 +48,6 @@ export const initBmsCustomer = async (
   phone: string,
   email: string,
 ) => {
-  return await initCustomer(id, phone, email);
+  await stopSdk();
+  await initSdk(id, phone, email);
 };

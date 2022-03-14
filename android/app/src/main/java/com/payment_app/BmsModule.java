@@ -46,14 +46,16 @@ public class BmsModule extends ReactContextBaseJavaModule {
         return "BmsModule";
     }
 
-  private static List<ViaZone> bmsZones = new ArrayList<>();
+  private static String userId;
+  private static String userPhone;
+  private static String userEmail;
   private final static ViaBmsCtrl.ViaBmsCtrlDelegate bmsDelegate = new ViaBmsCtrl.ViaBmsCtrlDelegate() {
     @Override
     public void sdkInited(boolean success, List<ViaZone> zones) {
       Log.d(TAG, "1 sdk init " + success);
       Log.d(TAG, "Zone " + zones);
       if (success) {
-        bmsZones = zones;
+        ViaBmsCtrl.initCustomer(userId,userPhone, userEmail, zones);
       }
     }
 
@@ -145,9 +147,11 @@ public class BmsModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void stopSdk(final Promise promise){
     Log.i(TAG, "Is inited sdk " + ViaBmsCtrl.isSdkInited());
-    ViaBmsCtrl.destroySDK(true);
-
-//    return ViaBmsCtrl.isSdkInited();
+    boolean sdkInited = ViaBmsCtrl.isSdkInited();
+    if (sdkInited) {
+      ViaBmsCtrl.destroySDK(true);
+    }
+    promise.resolve( ViaBmsCtrl.isSdkInited());
   }
 
   @ReactMethod
@@ -176,8 +180,11 @@ public class BmsModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void initSdk() {
+  public void initSdk(String identifier, String phone, String email) {
     List<IBeacon> requestDistanceBeacons = new ArrayList<>();
+    userId = identifier;
+    userPhone = phone;
+    userEmail = email;
     // add beacon you want to track distance, only use this if you
     // specifically needs to use the onDistanceBeacons callback
 //    IBeacon simBeacon = new IBeacon("A4130021-2F39-4717-B86F-0F65EDAE18B1",16808,19400);
@@ -185,7 +192,6 @@ public class BmsModule extends ReactContextBaseJavaModule {
 //
 //    requestDistanceBeacons.add(simBeacon);
 //    requestDistanceBeacons.add(simBeacon2);
-    if(!ViaBmsCtrl.isSdkInited()) {
       ViaBmsCtrl.settings(
               true, // enableAlert: whether to show notification when a minisite is triggered
               true, // enableBackground: whether to enable beacon scanning in background mode
@@ -223,28 +229,16 @@ public class BmsModule extends ReactContextBaseJavaModule {
       // only call this after calling settings
       Log.i(TAG, "Start init SDK 1");
       ViaBmsCtrl.initSdk(this.getCurrentActivity(), BmsModule.BMS_KEY, null);
-    }
 
-  }
-
-  @ReactMethod
-  public void initCustomer(String identifier, String phone, String email) {
-    ViaBmsCtrl.initCustomer(identifier, phone, email, bmsZones);
   }
 
   @ReactMethod
   public void startService() {
     boolean sdkInited = ViaBmsCtrl.isSdkInited();
     Log.d(TAG, "startBmsService sdkInited " + sdkInited);
-    if(!ViaBmsCtrl.isSdkInited()) {
-      initSdk();
-    }
-    else {
-      Log.d(TAG, "startBmsService start Bms service ");
 
-      if(!ViaBmsCtrl.isBmsRunning()) {
-        ViaBmsCtrl.startBmsService();
-      }
+    if(!ViaBmsCtrl.isBmsRunning()) {
+      ViaBmsCtrl.startBmsService();
     }
   }
 
@@ -253,6 +247,7 @@ public class BmsModule extends ReactContextBaseJavaModule {
     Log.d(TAG, "is startBmsService started " + ViaBmsCtrl.isBmsRunning());
     promise.resolve(ViaBmsCtrl.isBmsRunning());
   }
+
 
 //  @ReactMethod
 //  public void testNotification() {
