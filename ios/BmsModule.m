@@ -29,21 +29,22 @@ RCT_REMAP_METHOD(initCtrl,
       }
 
 RCT_REMAP_METHOD(initSdk,
-initSdkResolver:(RCTPromiseResolveBlock)resolve
-                 rejecter:(RCTPromiseRejectBlock)reject) {
-                  [bmsController initSdk];
-                 resolve(@(true));
-       }
-
-
-RCT_REMAP_METHOD(initCustomer,
-                 id:(NSString* ) id
+                  id:(NSString* ) id
                  phone:(NSString* ) phone
                  email:(NSString* ) email
-initCustomerResolver:(RCTPromiseResolveBlock)resolve
+initSdkResolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject) {
-                [bmsController initCustomerWithId:id phone:phone email:email];
+  printf("init sdk ------");
+                  [bmsController initSdkWithIdentifier:id phone:phone email:email];
                  resolve(@(true));
        }
+
+RCT_REMAP_METHOD(stopSdk,
+                 stopSdkResolver:(RCTPromiseResolveBlock)resolve
+                 rejecter:(RCTPromiseRejectBlock)reject) {
+  printf("stop sdk ------");
+                  [bmsController destroySDK];
+                 resolve(@(true));
+        }
 
 @end

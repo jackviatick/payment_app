@@ -66,6 +66,21 @@ const Home = () => {
     return await AsyncStorage.getItem('USER_DATA');
   };
 
+  const runSDK = () => {
+    getUserData().then(data => {
+      console.log('user dta ', data);
+      if (!data) {
+        setShowModal(true);
+      } else {
+        let userData = data.split(',');
+        let id = userData[0];
+        let phone = userData[1];
+        let email = userData[2];
+        initBmsCustomer(id, phone, email);
+      }
+    });
+  };
+
   useEffect(() => {
     console.log('RN init sdk');
     getUserData().then(data => {

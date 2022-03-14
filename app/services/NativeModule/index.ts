@@ -19,12 +19,8 @@ export const stopModule = async () => {
   await stopSdk();
 };
 
-export const initBmsSdk = async () => {
-  if (initCtrl) {
-    await initCtrl();
-  }
-  const success = await initSdk();
-  return success;
+export const initModuleCtrl = async () => {
+  await initCtrl();
 };
 
 export const isInited = async () => {
@@ -48,6 +44,7 @@ export const initBmsCustomer = async (
   phone: string,
   email: string,
 ) => {
+  console.log('init customer native module');
   await stopSdk();
   await initSdk(id, phone, email);
 };
