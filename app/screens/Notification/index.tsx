@@ -46,20 +46,20 @@ const Notification = () => {
         <Text style={styles.fontWeightBold}>Today</Text>
         {renderSmallCard(
           'UCommune Transaction Point',
-          '7, March, 2022',
+          '19, March, 2022',
           'SGD 2.00',
         )}
 
         <Text style={styles.fontWeightBold}>Yesterday</Text>
         {renderSmallCard(
           'Woodlands Central Base',
-          '5, March, 2022',
+          '18, March, 2022',
           'SGD 85.78',
         )}
-        {renderSmallCard('Tuas Link Base Point', '4, March, 2022', 'SGD 29.99')}
-        {renderSmallCard('SDC Gate 1', '3, March, 2022', 'SGD 9.99')}
-        {renderSmallCard('SportHub Booth 2', '26, Feb, 2022', 'SGD 8.99')}
-        {renderSmallCard('SportHub Booth 1', '26, Feb, 2022', 'SGD 5.99')}
+        {renderSmallCard('Tuas Link Base Point', '18, March, 2022', 'SGD 29.99')}
+        {renderSmallCard('SDC Gate 1', '18, March, 2022', 'SGD 9.99')}
+        {renderSmallCard('SportHub Booth 2', '18, March, 2022', 'SGD 8.99')}
+        {renderSmallCard('SportHub Booth 1', '18, March, 2022', 'SGD 5.99')}
       </View>
     </ScrollView>
   );
